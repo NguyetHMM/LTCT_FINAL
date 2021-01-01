@@ -15,16 +15,22 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\View;
 
 class AccountModuleController extends Controller
 {
-    public function index(){
-        return view('accountmodule::personalDetails');
+    private $user_id_roles;
+    private $admin_id_roles;
+
+    public function __construct()
+    {
+        $this->user_id_roles = DB::table('roles')->where('name', 'user')->get()->toArray()[0]->id;
+        $this->admin_id_roles = DB::table('roles')->where('name', 'admin')->get()->toArray()[0]->id;
+        View::share(['user_id_roles' => $this->user_id_roles, 
+                    'admin_id_roles' => $this->admin_id_roles
+        ]);
     }
-    public function register(){
-            return view('accountmodule::register');
-          }
-      
+
     public function storeUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -38,7 +44,7 @@ class AccountModuleController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role_id' => 1
+                'role_id' => $this->user_id_roles,
             ]);
             return response()->json([
                 'success' => 'Register success',
@@ -51,38 +57,39 @@ class AccountModuleController extends Controller
         ], 403);
     }
 
-    public function login(){
-        return view('accountmodule::login');
+    public function authenticate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+        if (!$validator->fails()) {
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                if(Auth::user()->role_id == $this->admin_id_roles){
+                    return \response()->json([
+                        "success_admin" => route('admin-layout'),
+                    ], 200);
+                }
+                else{
+                    return \response()->json([
+                        "success_home" => route('home'),
+                    ], 200);
+                }
+            }else{
+                return response()->json([
+                    'error' => 'Oppes! You have entered invalid credentials',
+                ], 403);
+            }
+        }
+        return response()->json([
+            'error' => $validator->errors()->first()
+        ], 403);
     }
 
-    public function authenticate(Request $request)
-        {
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|string|email',
-                'password' => 'required|string',
-            ]);
-            if (!$validator->fails()) {
-                $credentials = $request->only('email', 'password');
-                if (Auth::attempt($credentials)) {
-                    if(Auth::user()->role_id == 0){
-                        return \response()->json([
-                            "success_admin" => route('admin-layout'),
-                        ], 200);
-                    }
-                    else{
-                        return \response()->json([
-                            "success_home" => route('home'),
-                        ], 200);
-                    }
-                }else{
-                    return response()->json([
-                        'error' => 'Oppes! You have entered invalid credentials',
-                    ], 403);
-                }
-            }
-            return response()->json([
-                'error' => $validator->errors()->first()
-            ], 403);
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 
     public function personalDetails(){
@@ -102,15 +109,6 @@ class AccountModuleController extends Controller
         return redirect(route('personalDetails'))->with('error', 'Oppes! You have entered invalid credentials');
     }
 
-    public function logout(){
-        Auth::logout();
-        return redirect()->route('home');
-    }
-
-    public function home(){
-        return redirect()->route('main');
-    }
-
     public function orderHistory(){
         $all_orders = DB::table("orders")
         ->where('user_id',Auth::user()->id)->get();
@@ -126,13 +124,13 @@ class AccountModuleController extends Controller
     }
 
     public function changeUserRoleToAdmin($user_id){
-        DB::table('users')->where('id', $user_id)->update(['role_id'=>0]);
+        DB::table('users')->where('id', $user_id)->update(['role_id' => $this->admin_id_roles]);
         Session::put('message','User Role Changed To Admin Successfully !');
         return \redirect()->action([AccountModuleController::class, 'all_user']);
     }
     
     public function cancelAdminRole($user_id){
-        DB::table('users')->where('id', $user_id)->update(['role_id'=>1]);
+        DB::table('users')->where('id', $user_id)->update(['role_id' => $this->user_id_roles]);
         Session::put('message','Admin Role Canceled !');
         return \redirect()->action([AccountModuleController::class, 'all_user']);
     }

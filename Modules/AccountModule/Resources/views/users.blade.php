@@ -50,7 +50,7 @@
                     <td>{{ $user->name }}</td>
                     <td><span class="text-ellipsis">
                         <?php
-                        if($user->role_id==0){
+                        if($user->role_id == $admin_id_roles){
                         ?>
                         <a href="{{URL::to('/accountmodule/cancelAdminRole/'.$user->id)}}">
                             <span>Admin</span></a>
@@ -76,7 +76,7 @@
             </table>
             </div>
             <footer class="panel-footer">
-            <div class="row">
+            {{-- <div class="row">
                 
                 <div class="col-sm-5 text-center">
                 <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
@@ -91,7 +91,7 @@
                     <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
                 </ul>
                 </div>
-            </div>
+            </div> --}}
             </footer>
         </div>
     </div>        

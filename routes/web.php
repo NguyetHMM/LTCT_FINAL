@@ -17,6 +17,6 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
-Route::get('/main', function () {
-    return view('main');
-})->name('main');
+// Route::get('/main', function () {
+//     return view('main');
+// })->name('main');
