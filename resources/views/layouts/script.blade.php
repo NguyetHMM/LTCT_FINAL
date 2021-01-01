@@ -10,3 +10,4 @@
 <script src="{{ asset('Order/js/jquery.counterup.min.js') }}"></script>
 <script src="{{ asset('Order/js/jquery.parallax-1.1.3.js') }}"></script>
 <script src="{{ asset('Order/js/front.js') }}"></script>
+<script src="https://kit.fontawesome.com/f5145f72f0.js" crossorigin="anonymous"></script>

@@ -72,6 +72,7 @@
                             @if (Auth::user()->role_id == 1)
                                 <li><a href="{{ route('admin-layout') }}" target="_blank">Admin page</a></li>
                             @endif
+                            <li><a href="{{route('showOrder')}}"><i class="fas fa-cart-plus"></i>cart</a></li>   
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @else
                             <li>
