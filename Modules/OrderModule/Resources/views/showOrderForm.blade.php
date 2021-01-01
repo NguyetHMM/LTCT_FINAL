@@ -16,10 +16,6 @@
     <div class="container">
 
         <div class="row">
-
-            <!-- *** LEFT COLUMN ***
-            _________________________________________________________ -->
-
             <div class="col-md-12 clearfix" id="customer-order" style="margin-bottom: 30px;">
                 <div class="box">
                     <form method="post" action="{{route('checkout')}}">
@@ -37,16 +33,16 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $total = 0;
-                                    $countProduct = 0;
-                                    $totalOrder = 0
-                                ?>
+                                        $total = 0;
+                                        $countProduct = 0;
+                                        $totalOrder = 0
+                                    ?>
                                     @foreach ($products as $key => $value)
                                     <?php
-                                    $countProduct+=1;
-                                    $total += $value->price*$value->quantity;
-                                    $totalOrder+=$total;
-                                ?>
+                                        $countProduct+=1;
+                                        $total += $value->product_price*$value->quantity;
+                                        $totalOrder+=$total;
+                                    ?>
                                     <tr>
                                         <td>
                                             <a href="">
@@ -57,13 +53,13 @@
                                         <td><a href="">{{$value->product_name}}</a>
                                         </td>
 
-                                        <?php $cost = ($value->quantity)*($value->price) ?>
+                                        <?php $cost = ($value->quantity)*($value->product_price) ?>
                                         <td>
                                             <input id="quantity" name="quantity" .{{$key+1}} type="number"
                                                 value="{{$value->quantity}}" class="{{" form-control
                                                 number_select" . $key}}" min="0">
                                         </td>
-                                        <td id="{{'product-price'.$key}}">{{$value->price}}</td>
+                                        <td id="{{'product-price'.$key}}">{{$value->product_price}}</td>
                                         <td>$0.00</td>
                                         <td id="{{'cost-product'.$key}}">{{$cost}}</td>
                                         <td><a href=""><i class="fa fa-trash-o"></i></a>
