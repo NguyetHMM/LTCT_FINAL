@@ -116,6 +116,15 @@ class AccountModuleController extends Controller
         return view('accountmodule::orderHistory', compact('all_orders'));
     }
 
+    public function orderDetails(Request $request)
+    {
+        $products = DB::table('order_details')
+            ->join('tbl_product','tbl_product.product_id','=','order_details.product_id')
+            ->where('order_id', $request->order_id)->get()->toArray();
+        // dd($products);
+        return view('accountmodule::orderDetails', compact('products'));
+    }
+
     // Cotroller quan ly nguoi dung
     public function all_user(){
         $all_user = DB::table('users')->get();

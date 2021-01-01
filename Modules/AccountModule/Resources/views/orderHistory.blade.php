@@ -31,6 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Order</th>
+                                        <th></th>
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Total</th>
@@ -40,12 +41,13 @@
                                 <tbody>
                                     @if (count($all_orders) > 0)
                                         @foreach ($all_orders as $key => $value)
-                                        <tr>
-                                            <td>{{$key+1}}</td>
-                                            <td>{{$value->orderDate}}</td>
-                                            <td>{{$value->state}}</td>
-                                            <td>{{$value->total}}VND</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td><a href="{{route('orderDetails', ['order_id' => $value->id])}}">Show Details</a></td>
+                                                <td>{{$value->orderDate}}</td>
+                                                <td>{{$value->state}}</td>
+                                                <td>{{$value->total}}VND</td>
+                                            </tr>
                                         @endforeach
                                     @endif
 
