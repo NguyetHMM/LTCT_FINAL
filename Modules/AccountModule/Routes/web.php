@@ -13,26 +13,28 @@
 
 Route::prefix('accountmodule')->group(function() {
 
-    Route::get('/', 'AccountModuleController@index');
-
+    // Register function --> done
     Route::get('/register', 'AccountModuleController@register')->name('register');
     Route::post('/register', 'AccountModuleController@storeUser');
 
+    // Login functionn --> done
     Route::get('/login', 'AccountModuleController@login')->name('login');
     Route::post('/login', 'AccountModuleController@authenticate');
 
+    Route::get('logout', 'AccountModuleController@logout')->name('logout');
+
+    // Show detail user --> done 
     Route::get('/personalDetails', 'AccountModuleController@personalDetails')->name('personalDetails');
     Route::post('/personalDetails', 'AccountModuleController@storeEditUserInfor');
 
+    // History orders of an user
+    // todo: show detail an ordered
     Route::get('/orderHistory', 'AccountModuleController@orderHistory')->name('orderHistory');
 
-    Route::get('logout', 'AccountModuleController@logout')->name('logout');
-
-    Route::get('/home', 'AccountModuleController@home')->name('home');
-
+    // ADMIN 
     // Quan ly nguoi dung
     Route::get('/all-user', 'AccountModuleController@all_user')->name('all-user');
- 
+
     Route::get('/changeUserRoleToAdmin/{user_id}', 'AccountModuleController@changeUserRoleToAdmin');
     Route::get('/cancelAdminRole/{user_id}', 'AccountModuleController@cancelAdminRole');
 

@@ -50,7 +50,7 @@
                     <td>{{ $user->name }}</td>
                     <td><span class="text-ellipsis">
                         <?php
-                        if($user->role_id==0){
+                        if($user->role_id == $admin_id_roles){
                         ?>
                         <a href="{{URL::to('/accountmodule/cancelAdminRole/'.$user->id)}}">
                             <span>Admin</span></a>

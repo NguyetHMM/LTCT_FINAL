@@ -48,11 +48,11 @@
                         </li>
 
                         <li>
-                            <a href="#">Team </a>
+                            <a href="https://github.com/NguyetHMM/LTCT_FINAL" target="_blank">Team </a>
                         </li>
 
                         <li class="dropdown">
-                            <a href="#">Contact Us</a>
+                            <a href="https://github.com/NguyetHMM/LTCT_FINAL" target="_blank">Contact Us</a>
                             {{-- <ul class="dropdown-menu">
                                 <li><a href="contact.html">Le Hoang Anh Trung </a>
                                 </li>
@@ -70,7 +70,7 @@
                             <li><a href="{{ route('personalDetails') }}" style="text-decoration-color: brown"><i class="fa fa-user"></i>HELLO
                                     {{ Auth::user()->name }}</a></li>
                             @if (Auth::user()->role_id == 1)
-                                <li><a href="{{ route('admin-layout') }}">Admin page</a></li>
+                                <li><a href="{{ route('admin-layout') }}" target="_blank">Admin page</a></li>
                             @endif
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @else
