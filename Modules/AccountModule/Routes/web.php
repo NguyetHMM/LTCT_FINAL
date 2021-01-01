@@ -30,6 +30,7 @@ Route::prefix('accountmodule')->group(function() {
     // History orders of an user
     // todo: show detail an ordered
     Route::get('/orderHistory', 'AccountModuleController@orderHistory')->name('orderHistory');
+    Route::get('/orderDetails/{order_id}', 'AccountModuleController@orderDetails')->name('orderDetails');
 
     // ADMIN 
     // Quan ly nguoi dung

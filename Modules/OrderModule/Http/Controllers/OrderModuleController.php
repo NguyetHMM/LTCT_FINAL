@@ -74,43 +74,19 @@ class OrderModuleController extends Controller
         return redirect()->action([OrderModuleController:: class,'show']);
     }
 
-    public function updateCart(){
-        return view('ordermodule::index');
+    public function deleteProductInCart(Request $request)
+    {
+        DB::table('cart_details')
+            ->where('product_id', $request->product_id)
+            ->where('user_id', Auth::user()->id)
+            ->delete();
+        return redirect()->action([OrderModuleController:: class,'show']);
     }
+
     public function show_detail($product_id){
         $product = DB::table('tbl_product')->where('product_id',$product_id)->get();
         // dd($product);
         return view('ordermodule::productDetail')->with('show_detail', $product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('ordermodule::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
