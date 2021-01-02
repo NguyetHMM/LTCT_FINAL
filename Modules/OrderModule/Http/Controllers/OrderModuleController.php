@@ -51,24 +51,37 @@ class OrderModuleController extends Controller
         ->join('tbl_product','tbl_product.product_id','=','cart_details.product_id')
         ->where('user_id', Auth::user()->id)
         ->get();
-        // dd($products);
-        return view('ordermodule::showOrderForm',compact('products'));
+        // dd($products[1]->total);
+        $totalOrder = 0;
+        foreach($products as $pro){
+            $totalOrder += $pro->total;
+        }
+        // dd($totalOrder);
+        return view('ordermodule::showOrderForm',compact('products','totalOrder'));
     }
 
     public function addToCart(Request $request)
-    {   
-        $addQuantity = DB::table('cart_details')->where('product_id',$request->product_id)->get();
+    {  
+        // dd($request);
+        $addQuantity = DB::table('cart_details')
+        ->where('product_id',$request->product_id)
+        ->where('user_id',Auth::user()->id)
+        ->get();
         // Handle save to database 
         $count = count($addQuantity);
         if($count != 0){
             $qty = $addQuantity[0]->quantity;
+            $oldTotal = $addQuantity[0]->total;
             DB::table('cart_details')
             ->where('product_id',$request->product_id)
-            ->update(['quantity' => ($qty+$request->product_qty)]);
+            ->update(['quantity' => ($qty+$request->product_qty),
+                        'total' => ($oldTotal + $request->product_qty*$request->price)
+            ]);
         } else{
             $data['product_id'] = $request->product_id;
             $data['quantity'] = $request->product_qty;
             $data['user_id'] = Auth::user()->id;
+            $data['total'] = ($request->product_qty*$request->price);
             DB::table('cart_details')->insert($data);
         }
         return redirect()->action([OrderModuleController:: class,'show']);

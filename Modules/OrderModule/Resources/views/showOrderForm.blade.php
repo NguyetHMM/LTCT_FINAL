@@ -66,6 +66,7 @@
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </td>
+                                        <input type="hidden" value="{{$value->product_id}}" name="product_id" id="product_id">
                                     </tr>
                                     @endforeach
                                     <input type="hidden" value="{{$totalOrder}}" id="total" name="total">

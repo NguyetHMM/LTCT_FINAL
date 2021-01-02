@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class OrderDetail extends Migration
+class AddCartDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class OrderDetail extends Migration
      */
     public function up()
     {
-        Schema::create('order_detail', function (Blueprint $table) {
-            $table->Increments('product_id');
-            $table->integer('order_id');
-            $table->integer('quantity');
-            $table->double('price');
-            $table->timestamps();
+        Schema::table('cart_details', function (Blueprint $table) {
+            $table->double('total')->default(0);
         });
     }
 
@@ -29,6 +25,10 @@ class OrderDetail extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_detail');
+        Schema::table('cart_details', function (Blueprint $table) {
+            Schema::table('cart_details', function($table) {
+                $table->dropColumn('total');
+            });
+        });
     }
 }
