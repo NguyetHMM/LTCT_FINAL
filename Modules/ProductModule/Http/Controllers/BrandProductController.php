@@ -21,7 +21,7 @@ class BrandProductController extends Controller
     }
 
     public function all_brand_product(){
-        $all_brand_product = DB::table('tbl_brand')->get();
+        $all_brand_product = DB::table('tbl_brand')->paginate(5);
         $manager_brand_product = view('productmodule::admin.all_brand_product')->with('all_brand_product', $all_brand_product);
         return view('admin')->with('all_brand_product', $manager_brand_product); 
     }

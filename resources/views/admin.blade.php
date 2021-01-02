@@ -55,6 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu extended logout">
+							<li><a href="{{ route('home') }}"><i class=" fa fa-home"></i>Home page</a></li>
 							<li><a href="{{ route('personalDetails') }}"><i class=" fa fa-suitcase"></i>Profile</a></li>
 							<li><a href="{{ route('logout') }}"><i class="fa fa-key"></i> Log Out</a></li>
 						</ul>

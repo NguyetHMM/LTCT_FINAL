@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
     {
         //
         $fake = Faker::create();
-        for($i = 0; $i<5;$i++){
+        for($i = 0; $i<10;$i++){
             $product[]  = [
                 'category_id' => rand(1,5),
                 'brand_id' => rand(1,6),
@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
                 'product_name' => $fake->lastName,
                 'product_desc' => $fake->text,
                 'product_price' => 10000,
-                'product_image' => $i+1 . '.jpg' ,
+                'product_image' => $fake->image(storage_path('app\public\images'),400,300, null, false),
                 'product_status' => 1
             ];
         }
