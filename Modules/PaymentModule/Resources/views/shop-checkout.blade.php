@@ -17,10 +17,9 @@
                 <div class="row">
 
                     <div class="col-md-9 clearfix" id="checkout">
-
                         <div class="box">
-                            <form method="post" action="shop-checkout2.html">
-
+                            <form method="post" action="{{Route('confirmCheckout')}}">
+                                {{csrf_field()}}
                                 <ul class="nav nav-pills nav-justified">
                                     <li class="active"><a href="#"><!--<i class="fa fa-map-marker">--></i><br>Payment</a>
                                     </li>
@@ -37,13 +36,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="firstname"></label>
-                                                <input type="text" class="form-control" placeholder="Frist Name" id="firstname" required>
+                                                <input type="text" class="form-control" placeholder="Frist Name" id="firstname" name="firstname" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lastname"></label>
-                                                <input type="text" class="form-control" placeholder="Last Name" id="lastname" required>
+                                                <input type="text" class="form-control" placeholder="Last Name" id="lastname" name="lastname" required>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +52,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="street"></label>
-                                                <input type="text" class="form-control" placeholder="Address" id="street" required>
+                                                <input type="text" class="form-control" placeholder="Address" id="street" name="address" required>
                                             </div>
                                         </div>
                                     </div>
@@ -62,13 +61,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="email"></label>
-                                                <input type="text" class="form-control" placeholder="Email" id="email" required>
+                                                <input type="text" class="form-control" placeholder="Email" id="email" name="email" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="phone_num"></label>
-                                                <input type="text" class="form-control" placeholder="Phone number" id="phone_num" required>
+                                                <input type="text" class="form-control" placeholder="Phone number" id="phone_num" name="phone_num" required>
                                             </div>
                                         </div>
                                     </div>
@@ -76,13 +75,14 @@
                                 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        <a href="/ordermodule/order" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
                                     </div>
                                     <div class="pull-right">
                                         <button type="submit" class="btn btn-template-main">Purchase Confirmation
                                         </button>
                                     </div>
                                 </div>
+                                <input type="hidden" value="{{$totalOrder}}" name="totalOrder" id="totalOrder">
                             </form>
                         </div>
                         <!-- /.box -->
@@ -103,12 +103,12 @@
                                 <table class="table">
                                     <tbody>
                                         <?php
-                                        $cost_cart = 0;
+                                        $cost_cart = $totalOrder;
                                         $ship=30000
 						                ?>
                                         <tr>
                                             <td>Order subtotal</td>
-                                            <th>{{$products[0]->total}}</th>
+                                            <th>{{$totalOrder}}</th>
                                             
                                         </tr>
                                         <tr>
