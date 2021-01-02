@@ -21,7 +21,7 @@ class CategoryProductController extends Controller
     }
 
     public function all_category_product(){
-        $all_category_product = DB::table('tbl_category_product')->get();
+        $all_category_product = DB::table('tbl_category_product')->paginate(5);
         $manager_category_product = view('productmodule::admin.all_category_product')
         ->with('all_category_product', $all_category_product);
         return view('admin')->with('all_category_product', $manager_category_product); 

@@ -15,15 +15,18 @@ class ProductSeeder extends Seeder
     {
         //
         $fake = Faker::create();
-        for($i = 0; $i<5;$i++){
+        $fake->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($fake));
+        $c_n = ["Men", "Lady", "Boy", "Girl", "Baby" ];
+        for($i = 0; $i<10;$i++){
+            $cate = rand(0,4);
             $product[]  = [
-                'category_id' => rand(1,5),
+                'category_id' => $cate+1,
                 'brand_id' => rand(1,6),
                 'product_content' => $fake->lastName,
                 'product_name' => $fake->lastName,
                 'product_desc' => $fake->text,
                 'product_price' => 10000,
-                'product_image' => $i+1 . '.jpg' ,
+                'product_image' => $fake->image(storage_path('app\public\images'), 480, 650, ['raiment'], false),
                 'product_status' => 1
             ];
         }

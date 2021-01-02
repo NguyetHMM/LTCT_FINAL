@@ -33,7 +33,7 @@ class ProductController extends Controller
         ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')
         // ->select('tbl_product.*', 'tbl_category_product.category_name', 'tbl_brand.brand_name')
-        ->orderby('tbl_product.product_id','desc')->get();
+        ->orderby('tbl_product.product_id','desc')->paginate(10);
         // dd($all_product);  
 
         $manager_product = view('productmodule::admin.all_product')->with('all_product', $all_product);

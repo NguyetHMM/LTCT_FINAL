@@ -95,7 +95,7 @@
                         
                             <div class="col-md-4 col-sm-6">
                                 <div class="product">
-                                    <div class="" style="height:200px; width:200px;"> <!-- da xoa class="image"-->
+                                    <div class=""> <!-- da xoa class="image"-->
                                         <a href="{{ URL::to('ordermodule/productDetail/' . $pro->product_id) }}">
                                             <img src="{{ asset('storage/images/' . $pro->product_image) }}" alt=""
                                                 class="img-responsive image1">
@@ -131,33 +131,15 @@
                         </div>
 
                     </div>
-
-
-                    <div class="pages">
-
-                        <p class="loadMore">
-                            <a href="#" class="btn btn-template-main"><i class="fa fa-chevron-down"></i> Load
-                                more</a>
-                        </p>
-
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a>
-                            </li>
-                            <li class="active"><a href="#">1</a>
-                            </li>
-                            <li><a href="#">2</a>
-                            </li>
-                            <li><a href="#">3</a>
-                            </li>
-                            <li><a href="#">4</a>
-                            </li>
-                            <li><a href="#">5</a>
-                            </li>
-                            <li><a href="#">&raquo;</a>
-                            </li>
-                        </ul>
+                    <div class="row">
+                        <div class="col-md-5">
+                            
+                        </div>
+                        <div class="col-md-4">
+                            {{$all_product->links()}}
+                        </div>
                     </div>
-
+                    
 
                 </div>
                 <!-- /.col-md-9 -->
