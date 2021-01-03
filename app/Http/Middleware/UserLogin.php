@@ -24,7 +24,8 @@ class UserLogin
         if(Auth::check()){
             return $next($request);
         } else {
-            return redirect()->action([ProductModuleController:: class,'home'])->with('alert','Hay dang nhap de thuc hien chuc nang nay');
+            // return redirect()->action([ProductModuleController:: class,'home'])->with('alert','Hay dang nhap de thuc hien chuc nang nay');
+            return \redirect()->route('home');
         }
         
     }

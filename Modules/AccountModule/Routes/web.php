@@ -21,24 +21,23 @@ Route::prefix('accountmodule')->group(function() {
     Route::get('/login', 'AccountModuleController@login')->name('login');
     Route::post('/login', 'AccountModuleController@authenticate');
 
-    Route::get('logout', 'AccountModuleController@logout')->name('logout');
+    Route::get('logout', 'AccountModuleController@logout')->name('logout')->middleware('UserLogin');
 
     // Show detail user --> done 
-    Route::get('/personalDetails', 'AccountModuleController@personalDetails')->name('personalDetails');
-    Route::post('/personalDetails', 'AccountModuleController@storeEditUserInfor');
+    Route::get('/personalDetails', 'AccountModuleController@personalDetails')->name('personalDetails')->middleware('UserLogin');
+    Route::post('/personalDetails', 'AccountModuleController@storeEditUserInfor')->middleware('UserLogin');
 
     // History orders of an user
-    // todo: show detail an ordered
-    Route::get('/orderHistory', 'AccountModuleController@orderHistory')->name('orderHistory');
-    Route::get('/orderDetails/{order_id}', 'AccountModuleController@orderDetails')->name('orderDetails');
+    Route::get('/orderHistory', 'AccountModuleController@orderHistory')->name('orderHistory')->middleware('UserLogin');
+    Route::get('/orderDetails/{order_id}', 'AccountModuleController@orderDetails')->name('orderDetails')->middleware('UserLogin');
 
     // ADMIN 
     // Quan ly nguoi dung
-    Route::get('/all-user', 'AccountModuleController@all_user')->name('all-user');
+    Route::get('/all-user', 'AccountModuleController@all_user')->name('all-user')->middleware('UserLogin');
 
-    Route::get('/changeUserRoleToAdmin/{user_id}', 'AccountModuleController@changeUserRoleToAdmin');
-    Route::get('/cancelAdminRole/{user_id}', 'AccountModuleController@cancelAdminRole');
+    Route::get('/changeUserRoleToAdmin/{user_id}', 'AccountModuleController@changeUserRoleToAdmin')->middleware('UserLogin');
+    Route::get('/cancelAdminRole/{user_id}', 'AccountModuleController@cancelAdminRole')->middleware('UserLogin');
 
-    Route::get('/delete-user/{user_id}', 'AccountModuleController@delete_user');
+    Route::get('/delete-user/{user_id}', 'AccountModuleController@delete_user')->middleware('UserLogin');
 
 });
