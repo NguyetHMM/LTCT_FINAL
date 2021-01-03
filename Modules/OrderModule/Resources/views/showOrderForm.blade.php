@@ -54,9 +54,9 @@
 
                                         <?php $cost = ($value->quantity)*($value->product_price) ?>
                                         <td>
-                                            <input id="quantity" name="quantity" .{{$key+1}} type="number"
-                                                value="{{$value->quantity}}" class="{{" form-control
-                                                number_select" . $key}}" min="1">
+                                            <input id="quantity" name="{{ 'number_select' . $key }}" type="number"
+                                                value="{{$value->quantity}}" class="form-control {{
+                                            'number_select' . $key}}" min="1">
                                         </td>
                                         <td id="{{'product-price'.$key}}">{{$value->product_price}}</td>
                                         <td>$0.00</td>
@@ -70,6 +70,7 @@
                                     </tr>
                                     @endforeach
                                     <input type="hidden" value="{{$totalOrder}}" id="total" name="total">
+                                    <input type="hidden" name="product_count" value="{{$countProduct}}">
                                 </tbody>
                                 <tfoot>
                                     <tr>
