@@ -121,4 +121,32 @@ class ProductController extends Controller
         
     }
 
+    public function filter_cate($category_id){
+        $cate_product = DB::table('tbl_category_product')
+        ->where('category_status','1')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')
+        ->where('brand_status','1')->orderby('brand_id','desc')->get();
+        $all_product = DB::table('tbl_product')
+        ->where('product_status','1')->where('category_id', $category_id)
+        ->orderby('tbl_product.product_id','desc')->paginate(9);
+        // dd($all_product);  
+        return view('productmodule::user.home')->with('all_product', $all_product)
+        ->with('category', $cate_product)
+        ->with('brand', $brand_product);
+    }
+
+    public function filter_brand($brand_id){
+        $cate_product = DB::table('tbl_category_product')
+        ->where('category_status','1')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')
+        ->where('brand_status','1')->orderby('brand_id','desc')->get();
+        $all_product = DB::table('tbl_product')
+        ->where('product_status','1')->where('brand_id', $brand_id)
+        ->orderby('tbl_product.product_id','desc')->paginate(9);
+        // dd($all_product);  
+        return view('productmodule::user.home')->with('all_product', $all_product)
+        ->with('category', $cate_product)
+        ->with('brand', $brand_product);
+    }
+
 }

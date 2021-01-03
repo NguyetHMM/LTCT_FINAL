@@ -64,7 +64,7 @@
                                     <input type="hidden" value="{{$pro->product_price}}" name="price">
                                     <input type="hidden" value="{{$pro->product_id}}" name="product_id">
                                     <!-- <input type="hidden" value="{{ asset('') }}">      -->
-                                    <p class="price">${{ $pro->product_price }}</p>
+                                    <p class="price">{{ $pro->product_price }} vnđ</p>
 
                                     <p class="text-center">
                                         <button type="submit" class="btn btn-template-main"><i
