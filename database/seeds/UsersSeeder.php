@@ -15,12 +15,12 @@ class UsersSeeder extends Seeder
     {
         $faker =  Faker::create();
         $users = [];
-        for($index=0;$index<3;$index++){
+        for($index=0;$index<5;$index++){
             $users[] = [
                 'name' => $faker->name,
                 'email' => "user" . ($index+1) ."@gmail.com",
                 'password' => bcrypt('user1234'),
-                'role_id' => 1,
+                'role_id' => rand(1,2),
                 'phonenumber' => $faker->e164PhoneNumber,
                 'dateofbirth' => $faker->date($format = 'Y-m-d', $max = 'now'),
 
