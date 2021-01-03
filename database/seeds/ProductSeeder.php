@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
                 'product_name' => $fake->lastName,
                 'product_desc' => $fake->text,
                 'product_price' => 10000,
-                'product_image' => $fake->image(storage_path('app\public\images'), 480, 650, ['raiment'], false),
+                'product_image' => $fake->image(storage_path('app/public/images'), 480, 650, ['color'], false),
                 'product_status' => 1
             ];
         }

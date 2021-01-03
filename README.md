@@ -47,8 +47,12 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 - Step 3: Make table of database and Generate fake data
 
 	```
-    php artisan storage:link
-    - Tạo thư mục images trong public/storage
+	php artisan storage:links
+	```
+	Make folder images in public/storage  
+	Then fake data
+	
+	```
 	php artisan migrate --seed
 	```
 - Step 4: Run project

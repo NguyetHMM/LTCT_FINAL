@@ -45,11 +45,11 @@
                                     <tr>
                                         <td>
                                             <a href="">
-                                                <img src={{asset('Order/images/detailsquare.jpg')}}
+                                                <img src={{ asset('storage/images/' . $value->product_image) }}
                                                     alt="White Blouse Armani">
                                             </a>
                                         </td>
-                                        <td><a href="">{{$value->product_name}}</a>
+                                        <td><a href="{{ route('show_details', ['product_id' => $value->product_id])}}">{{$value->product_name}}</a>
                                         </td>
 
                                         <?php $cost = ($value->quantity)*($value->product_price) ?>
@@ -66,7 +66,7 @@
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </td>
-                                        <input type="hidden" value="{{$value->product_id}}" name="product_id" id="product_id">
+                                        <input type="hidden" value="{{$value->product_id}}" name="{{ 'hidden_product'.$key }}">
                                     </tr>
                                     @endforeach
                                     <input type="hidden" value="{{$totalOrder}}" id="total" name="total">
@@ -112,14 +112,26 @@
             var product_number = '<?php echo $countProduct; ?>';
             for(var i=0;i<product_number;i++){
                 let price = parseInt($('.number_select'+i).val()) * parseInt($('#product-price'+i).html());
-                $('#cost-product'+i).html(price);
+                $('#cost-product'+i).html(numeral(price).format('0,0[.]00đ'));
                 totalOrder+=price;
             }
             console.log(product_number);
             
-            $('#totalOrder').html('<strong>' + totalOrder + '</strong>');
+            $('#totalOrder').html('<strong>' + numeral(totalOrder).format('0,0[.]00đ') + '</strong>');
             
         });
     });
+
+    window.onload = function () {
+        var totalOrder = 0;
+        var product_number = '<?php echo $countProduct; ?>';
+        for (var i = 0; i < product_number; i++) {
+            let price = parseInt($('.number_select' + i).val()) *
+                parseInt($('#product-price' + i).html());
+            $('#cost-product' + i).html(numeral(price).format('0,0[.]00đ'));
+            totalOrder += price;
+        }
+        $('#totalOrder').html('<strong>' + numeral(totalOrder).format('0,0[.]00đ') + '</strong>');
+    };
 </script>
 @endsection

@@ -41,4 +41,5 @@
     <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
     @include('layouts.script')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
