@@ -23,53 +23,38 @@
                     <!-- *** MENUS AND FILTERS ***-->
                     <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
-                        </div>
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Categories</h3>
+                            </div>
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked category-menu">
                                     @foreach ($category as $key => $cate)
-                                        <ul>
-                                            <li><a href="#" value="{{ $cate->category_id }}">{{ $cate->category_name }}</a>
-                                            </li>
-                                        </ul>
+                                    <li>
+                                        <a href="{{ URL::to('productmodule/filter-cate/' . $cate->category_id) }}">{{ $cate->category_name }}</a>
+                                    </li>
                                     @endforeach
-                                </li>
-                            </ul>
+                                </ul>
 
-                        </div>
+                            </div>
                     </div>
 
                     <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Brands</h3>
-                            <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i>
-                                <span class="hidden-sm">Clear</span></a>
-                        </div>
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Brands</h3>
+                            </div>
 
-                        <div class="panel-body">
-
-                            <form>
-                                <div class="form-group">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked category-menu">
                                     @foreach ($brand as $key => $brand)
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"
-                                                    value="{{ $brand->brand_id }}">{{ $brand->brand_name }}
-                                            </label>
-                                        </div>
+                                    <li>
+                                        <a href="{{ URL::to('productmodule/filter-brand/' . $brand->brand_id) }}">{{ $brand->brand_name }}</a>
+                                    </li>
                                     @endforeach
-                                </div>
+                                </ul>
 
-                                <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i>
-                                    Apply</button>
-
-                            </form>
-
-                        </div>
+                            </div>
                     </div>
 
                     <!-- *** MENUS AND FILTERS END *** -->
@@ -95,23 +80,20 @@
                         
                             <div class="col-md-4 col-sm-6">
                                 <div class="product">
-                                    <div class=""> <!-- da xoa class="image"-->
+                                    <div class="image"> <!-- da xoa class="image"-->
                                         <a href="{{ URL::to('ordermodule/productDetail/' . $pro->product_id) }}">
                                             <img src="{{ asset('storage/images/' . $pro->product_image) }}" alt=""
                                                 class="img-responsive image1">
+                                            
                                         </a>
                                     </div>
                                     <!-- /.image -->
                                     <div class="text">
-                                        <h3><a
+                                        <h5><a
                                                 href="{{ URL::to('ordermodule/productDetail/' . $pro->product_id) }}">{{ $pro->product_name }}</a>
-                                        </h3>
-                                        <p class="price">{{ $pro->product_price }}</p>
-                                        <p class="buttons">
-                                            <a href="shop-detail.html" class="btn btn-default">View detail</a>
-                                            <a href="shop-basket.html" class="btn btn-template-main"><i
-                                                    class="fa fa-shopping-cart"></i>Add to cart</a>
-                                        </p>
+                                        </h>
+                                        <p>{{ $pro->product_content }}</p>
+                                        <p class="price">{{ $pro->product_price }}đ</p>
                                     </div>
                                     <!-- /.text -->
                                 </div>
