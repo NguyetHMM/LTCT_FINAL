@@ -16,7 +16,7 @@ Route::prefix('paymentmodule')->group(function() {
     // Route::get('/checkout','PaymentModuleController@show')->name('show');
 
     //Thuc
-    Route::post('/checkout', 'PaymentModuleController@checkout')->name('checkout');
-    Route::get('/show-payment','PaymentModuleController@show')->name('show-pay');
-    Route::post('checkout/confirmed','PaymentModuleController@confirmCheckout')->name('confirmCheckout');
+    Route::post('/checkout', 'PaymentModuleController@checkout')->name('checkout')->middleware('UserLogin');
+    Route::get('/show-payment','PaymentModuleController@show')->name('show-pay')->middleware('UserLogin');
+    Route::post('checkout/confirmed','PaymentModuleController@confirmCheckout')->name('confirmCheckout')->middleware('UserLogin');
 });

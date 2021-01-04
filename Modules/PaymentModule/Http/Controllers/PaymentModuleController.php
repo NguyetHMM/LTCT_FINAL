@@ -18,19 +18,39 @@ class PaymentModuleController extends Controller
         return view('paymentmodule::index');
     }
 
-   
+    public function checkout(Request $request){
+        // dd($request->all()); 
+        // dd($request['total']);
+        $data=array();
+        $product_count = $request->product_count;
+        for($i = 0; $i < $product_count; $i++){
+            $data['user_id'] = Auth::user()->id;
+            $data['product_id'] = $request['hidden_product'.$i];
+            $data['quantity'] = $request['number_select'.$i];
+            $temp = DB::table('tbl_product')
+                ->where('product_id', $data['product_id'])
+                ->get();
+            // dd($temp[0]);
+            $data['total'] = $temp[0]->product_price*$data['quantity'];
+            DB::table('cart_details')->where(['product_id' => $data['product_id'],'user_id' => $data['user_id']])->update($data);
+        }
+        return \redirect()->route('show-pay');
+    }
 
     public function show(){
         $products = DB::table('cart_details')
         ->join('tbl_product','tbl_product.product_id','=','cart_details.product_id')
         ->where('user_id',Auth::user()->id)
         ->get();
-        // dd($products);
+        // dd($totalOrder);
         $totalOrder = 0;
         foreach($products as $pro){
             $totalOrder += $pro->total;
         }
-        return view('paymentmodule::shop-checkout',compact('products','totalOrder'));
+        return view('paymentmodule::shop-checkout',[
+            'products' => $products,
+            'totalOrder' => $totalOrder
+        ]);
     }
 
     public function confirmCheckout(Request $request){
@@ -65,14 +85,5 @@ class PaymentModuleController extends Controller
 
         DB::table('cart_details')->where('user_id', '=', Auth::user()->id)->delete();
         return view('paymentmodule::afterPay',\compact('infoOrder'));
-    }
-
-    public function checkout(Request $request){
-        // dd($request->all());
-        // DB::table('cart_detail')
-        // ->where('user_id',Auth::user()->id)
-        // ->where('product_id',$request->pro)
-        return \redirect()->action([PaymentModuleController::class, 'show']);
-
     }
 }

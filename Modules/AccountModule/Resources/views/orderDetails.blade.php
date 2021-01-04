@@ -43,11 +43,11 @@
                                     <tr>
                                         <td>
                                             <a href="">
-                                                <img src={{asset('Order/images/detailsquare.jpg')}}
+                                                <img src={{ asset('storage/images/' . $value->product_image) }}
                                                     alt="White Blouse Armani">
                                             </a>
                                         </td>
-                                        <td><a href="">{{$value->product_name}}</a>
+                                        <td><a href="{{ route('show_details', ['product_id' => $value->product_id])}}">{{$value->product_name}}</a>
                                         </td>
 
                                         <?php $cost = ($value->quantity)*($value->product_price) ?>

@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\UserLogin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +13,8 @@
 
 Route::prefix('ordermodule')->group(function() {
     Route::get('/', 'OrderModuleController@index')->name('index-2'); 
-    Route::get('/order','OrderModuleController@show')->name('showOrder');
-    Route::post('/order','OrderModuleController@addToCart')->name('addToCart');
-    Route::get('/deleteProductInCart/{product_id}','OrderModuleController@deleteProductInCart')->name('deleteProctCart');
+    Route::get('/order','OrderModuleController@show')->name('showOrder')->middleware('UserLogin');
+    Route::post('/order','OrderModuleController@addToCart')->name('addToCart')->middleware('UserLogin');
+    Route::get('/deleteProductInCart/{product_id}','OrderModuleController@deleteProductInCart')->name('deleteProctCart')->middleware('UserLogin');
     Route::get('/productDetail/{product_id}','OrderModuleController@show_detail')->name('show_details');
 });
