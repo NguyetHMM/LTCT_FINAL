@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" name="product_price" class="form-control" 
+                            <input type="number" name="product_price" class="form-control" 
                                 placeholder="Giá sản phẩm" required>
                         </div>
                         <div class="form-group">

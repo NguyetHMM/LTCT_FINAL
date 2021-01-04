@@ -15,6 +15,15 @@
                     Session::put('message',null);
                 }
             ?>
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="panel-body">
                 <div class="position-center">
                     @foreach ($edit_product as $key => $pro)
@@ -23,12 +32,12 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
                             <input type="text" name="product_name" class="form-control" id="exampleInputEmail1"
-                        value = "{{$pro->product_name}}" >
+                        value = "{{$pro->product_name}}" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1"
-                                value="{{$pro->product_price}}">
+                                value="{{$pro->product_price}}" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>

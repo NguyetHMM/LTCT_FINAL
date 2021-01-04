@@ -98,6 +98,9 @@ class ProductController extends Controller
     }
 
     public function update_product(Request $request, $product_id){
+        $request->validate([
+            'product_image' => 'required|image'
+        ]);
         $data = array();
         $data['product_name'] = $request->product_name;
         $data['product_price'] = $request->product_price;
